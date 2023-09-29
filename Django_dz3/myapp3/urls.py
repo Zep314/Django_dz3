@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
+from .views import index, LastDay
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', index, name='index'),
+    path('lastday/<int:days>', LastDay.as_view(), name='lastday'),
 ]

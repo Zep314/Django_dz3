@@ -13,11 +13,11 @@ class Command(BaseCommand):
     help = "Create order."
 
     def handle(self, *args, **kwargs):
-        client_pk = 1  # Выбираем, от какого клиента поступил заказ
+        client_pk = 40  # Выбираем, от какого клиента поступил заказ
         client = Client.objects.filter(pk=client_pk).first()
 
         # Строим список товаров для заказа
-        products = Product.objects.filter(name__contains="Tesla")
+        products = Product.objects.filter(name__contains="Мягкий")
 
         order = Order(client=client,
                       total_price=decimal.Decimal('321.09'))
