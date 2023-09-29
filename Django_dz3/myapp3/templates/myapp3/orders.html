@@ -11,8 +11,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="text-body text-justify">
 
+<div class="text-body text-justify">
+    <div>
+        <label for="select1">Клиент: </label>
+        <select id="select1" name="client_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option value="1">q1</option>
+            <option value="2">q2</option>
+            <option value="3" selected>q3</option>
+            <option value="4">q4</option>
+        </select>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -23,8 +32,8 @@
         <tbody>
             {% for order in orders %}
             <tr>
-                <th scope="row">{{ order.id }}</th>
-                <td scope="row">{{ order.total_price }}</td>
+                <th scope="row">1</th>
+                <td scope="row">{{ order.price }}</td>
             </tr>
             {% endfor %}
         </tbody>

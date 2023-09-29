@@ -28,4 +28,4 @@ class Command(BaseCommand):
                           price=decimal.Decimal(price), amount=amount)
         product.save()
         logger.info(f'Successfully create product: {product}')
-        self.stdout.write(f'{product}')
+

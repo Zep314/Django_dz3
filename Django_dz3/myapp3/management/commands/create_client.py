@@ -27,4 +27,4 @@ class Command(BaseCommand):
                         phone=phone, address=address)
         client.save()
         logger.info(f'Successfully create client: {client}')
-        self.stdout.write(f'{client}')
+

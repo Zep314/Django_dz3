@@ -25,4 +25,4 @@ class Command(BaseCommand):
         order.products.set(products)  # "Прицепляем" к созданному заказу выбранные товары
 
         logger.info(f'Successfully create order: {order}')
-        self.stdout.write(f'{order}')
+
