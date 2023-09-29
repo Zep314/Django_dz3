@@ -1,0 +1,8 @@
+INFO 2023-09-29 09:13:13,164 get_all_orders 7348 30196 Get all orders!
+INFO 2023-09-29 09:13:42,145 get_all_orders 2896 11408 Get all orders!
+INFO 2023-09-29 09:27:20,013 create_client 28788 30232 Successfully create client: Name: name=q1, email: email=q2, phone: phone=q3, address: address=q4, register_date: 2023-09-29 06:27:20.004335+00:00
+INFO 2023-09-29 09:28:39,794 create_client 11464 18968 Successfully create client: Name: name=q1 q1, email: email=q2@qw.qw, phone: phone=+7-987-123-45-56, address: address=q1 q2 q3 q4, register_date: 2023-09-29 06:28:39.788598+00:00
+INFO 2023-09-29 09:28:55,090 get_all_clients 27136 27228 Get all clients!
+INFO 2023-09-29 09:31:23,305 get_all_clients 1828 16772 Get all clients!
+INFO 2023-09-29 09:32:33,348 create_client 16192 25512 Successfully create client: Name: 'q2 q2', email: q3@zx.zx, phone: '+7-000-000-00-01', address: 'heaven', register_date: 2023-09-29 06:32:33.343979+00:00
+INFO 2023-09-29 09:40:07,606 create_product 25468 12628 Successfully create product: Name: 'a1 a2' ,Description: 'qw as zx' ,Price: 12.34 ,Amount: 100 ,Create_date: 2023-09-29 06:40:07.602499+00:00 
