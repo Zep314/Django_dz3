@@ -1,12 +1,12 @@
 <p>
     <div style="display: flex; gap: 20px;">
-        <form action="/lastday/7">
+        <form action="/lastday/{{ client_id }}/7">
             <input type="submit" class="btn btn-primary" value="за последние 7 дней">
         </form>
-        <form action="/lastday/30">
+        <form action="/lastday/{{ client_id }}/30">
             <input type="submit" class="btn btn-primary" value="за последние 30 дней">
         </form>
-        <form action="/lastday/365">
+        <form action="/lastday/{{ client_id }}/365">
             <input type="submit" class="btn btn-primary" value="за последние 365 дней">
         </form>
     </div>

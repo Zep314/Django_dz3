@@ -17,6 +17,7 @@ def index(request):
     logger.info('Index page accessed! Redirect to /lastday/0/7')
     return redirect("/lastday/0/7")
 
+
 class LastDay(View):
     def get(self, request, client_id, days=1):
         if client_id == 0:
@@ -32,5 +33,14 @@ class LastDay(View):
             ;
             """
         orders = Order.objects.raw(sql, [client_id])
-        context = {'orders': orders}
+        # orders1 = Order.objects.filter(client_id=client_id). \
+        #     values_list('products', 'total_price', 'order_date')
+        orders1 = Order.objects.filter(client_id=client_id).prefetch_related('products')
+
+        context = {'orders': orders,
+                   'client_id': client_id,
+                   'clients': Client.objects.all(),
+                   'days': days,
+                   }
+        logger.info(f'orders1: {orders1}')
         return render(request, 'myapp3/orders.html', context)

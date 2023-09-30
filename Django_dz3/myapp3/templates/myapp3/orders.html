@@ -15,31 +15,48 @@
 <div class="text-body text-justify">
     <div>
         <label for="select1">Клиент: </label>
-        <select id="select1" name="client_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-            <option value="1">q1</option>
-            <option value="2">q2</option>
-            <option value="3" selected>q3</option>
-            <option value="4">q4</option>
+        <select id="select1" name="client_id" class="form-control">
+            {% for client in clients %}
+               <option value="{{ client.id }}"
+                   {% if client.id == client_id %}
+                   selected
+                   {% endif %}
+               >{{ client.name }}
+               </option>
+            {% endfor %}
         </select>
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">product_id</th>
+                <th scope="col">Наименование товара</th>
+                <th scope="col">Описание товара</th>
+                <th scope="col">Стоимость товара</th>
+                <th scope="col">Дата заказа товара</th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
-            <tr>
-                <th scope="row">1</th>
-                <td scope="row">{{ order.price }}</td>
-            </tr>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.description }}</td>
+                    <td>{{ order.price }}</td>
+                    <td>{{ order.order_date }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
     <hr>
     {% include 'myapp3/menu.html' %}
 </div>
+
+<script>
+ document.getElementById("select1").onchange = function(){
+    var value = document.getElementById("select1").value;
+    location.replace('/lastday/' + value + '/7');
+ };
+</script>
 
 {% endblock %}
