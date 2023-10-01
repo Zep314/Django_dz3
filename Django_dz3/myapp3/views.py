@@ -35,12 +35,13 @@ class LastDay(View):
         orders = Order.objects.raw(sql, [client_id])
         # orders1 = Order.objects.filter(client_id=client_id). \
         #     values_list('products', 'total_price', 'order_date')
-        orders1 = Order.objects.filter(client_id=client_id).prefetch_related('products')
+        orders1 = Order.objects.filter(client_id=client_id).all().products.all()
 
         context = {'orders': orders,
                    'client_id': client_id,
                    'clients': Client.objects.all(),
                    'days': days,
+                   'orders1': orders1,
                    }
         logger.info(f'orders1: {orders1}')
         return render(request, 'myapp3/orders.html', context)
