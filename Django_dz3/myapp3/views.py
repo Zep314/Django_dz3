@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 import logging
 from django.views import View
 from .models import Client, Order
+from django.utils import timezone
+from datetime import datetime, timedelta
+
 
 # Create your views here.
 
@@ -10,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     """
-    Функция - загушка. Если вызов был без параметров.
+    Функция - заглушка. Если вызов был без параметров.
     :param request:
     :return:
     """
@@ -19,29 +22,36 @@ def index(request):
 
 
 class LastDay(View):
+    """
+    Класс - форма вывода содержимого базы данных по запросу
+    """
     def get(self, request, client_id, days=1):
+        """
+        :param request: django объект - запрос
+        :param client_id: ID клиента, по которому выводим информацию
+        :param days: - количество дней, за которые ищем заказы
+        :return:
+        """
+
+        # Проверяем наличие клиента в базе, по которому передели client_id
         if client_id == 0:
-            client_id = list(Client.objects.values_list('id', flat=True))[0]
-        sql = """
-            SELECT DISTINCT
-                1 as id ,p.name, p.description, p.price, o.order_date 
-            FROM myapp3_order o
-            JOIN myapp3_order_products op ON op.order_id = o.id
-            JOIN myapp3_product p ON op.product_id = p.id
-            WHERE o.client_id=%s
-            ORDER BY o.order_date 
-            ;
-            """
-        orders = Order.objects.raw(sql, [client_id])
-        # orders1 = Order.objects.filter(client_id=client_id). \
-        #     values_list('products', 'total_price', 'order_date')
-        orders1 = Order.objects.filter(client_id=client_id).all().products.all()
+            try:
+                client_id = list(Client.objects.values_list('id', flat=True))[0]
+            except IndexError:
+                client_id = None
+
+        # Запрос в базу данных, в соответствие с заданием:
+        #   список заказанных клиентом товаров из всех его заказов с
+        #   сортировкой по времени (7, 30, 365 дней)
+        orders = ((Order.objects
+                  .filter(client_id=client_id, order_date__gte=datetime.now(tz=timezone.utc) - timedelta(days=days)))
+                  .distinct()
+                  .order_by("order_date")
+                  )
 
         context = {'orders': orders,
                    'client_id': client_id,
-                   'clients': Client.objects.all(),
+                   'clients': Client.objects.all(),  # Так же - отправляем всю базу клиентов в drop-down спискок
                    'days': days,
-                   'orders1': orders1,
                    }
-        logger.info(f'orders1: {orders1}')
         return render(request, 'myapp3/orders.html', context)

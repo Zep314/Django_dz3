@@ -14,6 +14,9 @@
 
 Товары в списке не должны повторятся.
 
+
+<details>
+<summary> Задание у уроку 2: </summary>
 ==========================
 
 Создайте три модели Django: клиент, товар и заказ.
@@ -42,7 +45,15 @@
 
 Допишите несколько функций CRUD для работы с моделями по желанию. Что по вашему мнению актуально в такой базе данных.
 
+==========================
+</details>
+
 ### Решение
+
+Повторяем действия для создания приложения из задания ко 2-му семинару
+
+<details>
+<summary>Действия:</summary>
 Выполняем стандартные процедуры для запуска нового приложения в новом проекте:
 
 Устанавливаем Django:
@@ -67,22 +78,22 @@
 
 Редактируем файлы:
 
-- [Django_dz2/Django_dz2/Django_dz2/settings.py](/Django_dz2/Django_dz2/settings.py)
-- [Django_dz2/Django_dz2/Django_dz2/urls.py](/Django_dz2/Django_dz2/urls.py)
-- [Django_dz2/Django_dz2/myapp2/urls.py](/Django_dz2/myapp2/urls.py)
-- [Django_dz2/Django_dz2/myapp2/views.py](/Django_dz2/myapp2/views.py)
+- [Django_dz3/Django_dz3/Django_dz3/settings.py](/Django_dz3/Django_dz3/settings.py)
+- [Django_dz3/Django_dz3/Django_dz3/urls.py](/Django_dz3/Django_dz3/urls.py)
+- [Django_dz3/Django_dz3/myapp3/urls.py](/Django_dz3/myapp3/urls.py)
+- [Django_dz3/Django_dz3/myapp3/views.py](/Django_dz3/myapp3/views.py)
 
 Создаем модель данных, в соответствие с заданием. 
 Модель данных находится в файле: 
 
-- [Django_dz2/Django_dz2/myapp2/models.py](/Django_dz2/myapp2/models.py)
+- [Django_dz3/Django_dz3/myapp3/models.py](/Django_dz3/myapp3/models.py)
 
 Для каждой таблицы были реализованы все **CRUD** методы. Для таблицы заказов (Order) выполнена поддержка связи 
 Many-to-Many с таблицей товаров (Product). 
 
 Примеры методов находятся в пакете *commands*:
 
-- [Django_dz2/Django_dz2/myapp2/management/commands/](/Django_dz2/myapp2/management/commands)
+- [Django_dz3/Django_dz3/myapp3/management/commands/](/Django_dz3/myapp3/management/commands)
 
 Создаем миграции для нашей модели данных (подготавливаем структуру базы данных для развертывания на сервере БД):
 
@@ -113,46 +124,45 @@ Many-to-Many с таблицей товаров (Product).
 
 Файл с журналом работы:
 
-- [logs/django.log](/Django_dz2/logs/django.log) 
+- [logs/django.log](/Django_dz3/logs/django.log) 
+</details>
+
+Для более удобной работы был написан генератор фейковых данных
+ 
+- [Django_dz3/Django_dz3/myapp3/management/commands/gen_fake_data.py](/Django_dz3/myapp3/management/commands/gen_fake_data.py)
+
+        python manage.py gen_fake_data.py 50 50 200
+
+В файле представлений описан запрос в базу данных и вызов формы представления данных по запросу
+
+- [Django_dz3/Django_dz3/myapp3/views.py](/Django_dz3/myapp3/views.py)
+
+Так же были подготовлены шаблоны для отображения формы. Файлы с шаблонами:
+
+- [Django_dz3/Django_dz3/myapp3/templates/base.html](/Django_dz3/myapp3/templates/base.html)
+- [Django_dz3/Django_dz3/myapp3/templates/menu.html](/Django_dz3/myapp3/templates/menu.html)
+- [Django_dz3/Django_dz3/myapp3/templates/orders.html](/Django_dz3/myapp3/templates/orders.html)
+
+Для более эстетичного восприятия был добавлен [bootstrap](https://getbootstrap.com/)
 
 ## Результат работы:
 
-Длинные строки разделил вручную, чтобы было более понятно:
+Таблица заказов за 7 дней для определенного клиента:
 
-    (venv) C:\Work\python\Django\Django_dz2\Django_dz2>python manage.py get_all_clients
-    INFO 2023-09-27 14:20:35,119 get_all_clients 30840 7576 Get all clients!
-    <QuerySet [
-    <Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00>, 
-    <Client: Name: John, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:46:18.055859+00:00>, 
-    <Client: Name: John, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 13:07:49.942485+00:00>
-    ]>
+![screen3.png](screen3.png)
 
-    (venv) C:\Work\python\Django\Django_dz2\Django_dz2>python manage.py get_all_products
-    INFO 2023-09-27 14:20:41,616 get_all_products 30656 25828 Get all products!
-    <QuerySet [
-    <Product: Name: Toyota ,Description: Best electric car ,Price: 0.50 ,Amount: 11 ,Create_date: 2023-09-26 12:12:00.113095+00:00 >, 
-    <Product: Name: Tesla ,Description: Best electric car ,Price: 123456.78 ,Amount: 11 ,Create_date: 2023-09-26 12:13:51.920890+00:00 >, 
-    <Product: Name: Tesla ,Description: Best electric car ,Price: 123456.78 ,Amount: 11 ,Create_date: 2023-09-26 12:49:38.977017+00:00 >, 
-    <Product: Name: Tesla ,Description: Best electric car ,Price: 123456.78 ,Amount: 11 ,Create_date: 2023-09-26 13:08:10.021048+00:00 >
-    ]>
+Таблица заказов за 30 дней для определенного клиента:
 
-    (venv) C:\Work\python\Django\Django_dz2\Django_dz2>python manage.py get_all_orders
-    INFO 2023-09-27 14:20:46,718 get_all_orders 23632 12396 Get all orders!
-    <QuerySet [
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet []>, Total price: 321.09 ,Order_date: 2023-09-26 12:53:43.930464+00:00>, 
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet []>, Total price: 321.09 ,Order_date: 2023-09-26 12:54:39.164671+00:00>, 
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet [
-        (3, 'Tesla', 'Best electric car', Decimal('123456.78'), 11, datetime.datetime(2023, 9, 26, 12, 13, 51, 920890, tzinfo=datetime.timezone.utc)), 
-        (6, 'Tesla', 'Best electric car', Decimal('123456.78'), 11, datetime.datetime(2023, 9, 26, 12, 49, 38, 977017, tzinfo=datetime.timezone.utc))
-        ]>, Total price: 44.44 ,Order_date: 2023-09-26 12:55:19.457471+00:00>, 
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet []>, Total price: 321.09 ,Order_date: 2023-09-26 13:17:20.294280+00:00>, 
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet []>, Total price: 321.09 ,Order_date: 2023-09-26 13:17:47.652770+00:00>, 
-    <Order: Client: Name: Oliver, email: john@example.com, phone: +7-123-456-78-90, address: 221B Baker Street, London NW1 6XE, England, register_date: 2023-09-26 10:00:06.392644+00:00, Product[s]: <QuerySet [
-        (3, 'Tesla', 'Best electric car', Decimal('123456.78'), 11, datetime.datetime(2023, 9, 26, 12, 13, 51, 920890, tzinfo=datetime.timezone.utc)), 
-        (6, 'Tesla', 'Best electric car', Decimal('123456.78'), 11, datetime.datetime(2023, 9, 26, 12, 49, 38, 977017, tzinfo=datetime.timezone.utc)), 
-        (7, 'Tesla', 'Best electric car', Decimal('123456.78'), 11, datetime.datetime(2023, 9, 26, 13, 8, 10, 21048, tzinfo=datetime.timezone.utc))
-        ]>, Total price: 321.09 ,Order_date: 2023-09-27 11:01:16.769490+00:00>
-    ]>
+![screen1.png](screen1.png)
 
-    (venv) C:\Work\python\Django\Django_dz2\Django_dz2>
+Таблица заказов за 365 дней для определенного клиента:
 
+![screen2.png](screen2.png)
+
+Выбор клиента:
+
+![screen4.png](screen4.png)
+
+Выбрали другого клиента:
+
+![screen5.png](screen5.png)

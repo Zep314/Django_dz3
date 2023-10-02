@@ -13,7 +13,7 @@
 {% block content %}
 
 <div class="text-body text-justify">
-    <div>
+    <div style="height: 80px;">
         <label for="select1">Клиент: </label>
         <select id="select1" name="client_id" class="form-control">
             {% for client in clients %}
@@ -26,55 +26,31 @@
             {% endfor %}
         </select>
     </div>
-    <table class="table">
-        <thead>
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Наименование товара</th>
-                <th scope="col">Описание товара</th>
-                <th scope="col">Стоимость товара</th>
-                <th scope="col">Дата заказа товара</th>
+                <th class="text-center align-middle" scope="col">#</th>
+                <th class="text-center align-middle" scope="col">Наименование товара</th>
+                <th class="text-center align-middle" scope="col">Описание товара</th>
+                <th class="text-center align-middle" scope="col">Стоимость товара</th>
+                <th class="text-center align-middle" scope="col">Дата заказа товара</th>
             </tr>
         </thead>
         <tbody>
+
             {% for order in orders %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ order.name }}</td>
-                    <td>{{ order.description }}</td>
-                    <td>{{ order.price }}</td>
-                    <td>{{ order.order_date }}</td>
-                </tr>
+                {% for product in order.products.all %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ order.order_date|date:"d.m.Y H:i:s" }}</td>
+                    </tr>
+                {% endfor %}
             {% endfor %}
         </tbody>
     </table>
-    <hr>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Наименование товара</th>
-                <th scope="col">Описание товара</th>
-                <th scope="col">Стоимость товара</th>
-                <th scope="col">Дата заказа товара</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders1 %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ order.name }}</td>
-                    <td>{{ order.description }}</td>
-                    <td>{{ order.price }}</td>
-                    <td>{{ order.order_date }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <hr>
-
-
-
 
     {% include 'myapp3/menu.html' %}
 </div>
