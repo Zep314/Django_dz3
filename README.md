@@ -139,9 +139,9 @@ Many-to-Many с таблицей товаров (Product).
 
 Так же были подготовлены шаблоны для отображения формы. Файлы с шаблонами:
 
-- [Django_dz3/Django_dz3/myapp3/templates/base.html](/Django_dz3/myapp3/templates/base.html)
-- [Django_dz3/Django_dz3/myapp3/templates/menu.html](/Django_dz3/myapp3/templates/menu.html)
-- [Django_dz3/Django_dz3/myapp3/templates/orders.html](/Django_dz3/myapp3/templates/orders.html)
+- [Django_dz3/Django_dz3/myapp3/templates/myapp3/base.html](/Django_dz3/myapp3/templates/myapp3/base.html)
+- [Django_dz3/Django_dz3/myapp3/templates/myapp3/menu.html](/Django_dz3/myapp3/templates/myapp3/menu.html)
+- [Django_dz3/Django_dz3/myapp3/templates/myapp3/orders.html](/Django_dz3/myapp3/templates/myapp3/orders.html)
 
 Для более эстетичного восприятия был добавлен [bootstrap](https://getbootstrap.com/)
 
